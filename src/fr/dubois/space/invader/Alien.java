@@ -12,7 +12,14 @@ public class Alien extends Sprite{
 	@Override
 	public void act() {
 		// TODO Auto-generated method stub
-		
+		if(x<=600)
+		{
+			x = x+5;
+		}
+		else
+		{
+			x = x+0;
+		}
 	}
 
 }

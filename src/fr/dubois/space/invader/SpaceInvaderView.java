@@ -67,13 +67,7 @@ public class SpaceInvaderView extends View {
 		Bitmap image_alien = loadImage(R.drawable.alien1);
         alien = new Alien(image_alien,0,0);
         update();
-        alien.act();        
-	}
-	
-	private void update() {
-		// TODO Auto-generated method stub
-		mRedrawHandler.sleep(40);
-		alien.act();
+        alien.act();      
 	}
 
 	private RefreshHandler mRedrawHandler = new RefreshHandler();
@@ -107,6 +101,12 @@ public class SpaceInvaderView extends View {
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		}
 		alien.draw(canvas);
+	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		mRedrawHandler.sleep(40);
+		alien.act();		
 	}
 
 	private int computeSize(int spec,int def){
