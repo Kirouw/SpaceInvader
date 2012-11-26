@@ -11,6 +11,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -40,7 +42,7 @@ public class SpaceInvaderView extends View {
 		init();
 	}
 
-/* Sélim Boughriet */
+/* Création de la fonction loadImage - Sélim Boughriet */
     public Bitmap loadImage(int identifiant) {
     	Resources r = this.getContext().getResources();
     	Drawable drawable = r.getDrawable(identifiant);
@@ -64,7 +66,37 @@ public class SpaceInvaderView extends View {
 		/* Sélim Boughriet */
 		Bitmap image_alien = loadImage(R.drawable.alien1);
         alien = new Alien(image_alien,0,0);
+        update();
+        alien.act();        
 	}
+	
+	private void update() {
+		// TODO Auto-generated method stub
+		mRedrawHandler.sleep(40);
+		alien.act();
+	}
+
+	private RefreshHandler mRedrawHandler = new RefreshHandler();
+
+    class RefreshHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            SpaceInvaderView.this.update();
+            SpaceInvaderView.this.invalidate();
+        }
+
+		public void update() {
+			// TODO Auto-generated method stub
+			mRedrawHandler.sleep(40);
+			alien.act();
+		}
+
+		public void sleep(long delayMillis) {
+        	this.removeMessages(0);
+            sendMessageDelayed(obtainMessage(0), delayMillis);
+        }
+    };
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -76,7 +108,6 @@ public class SpaceInvaderView extends View {
 		}
 		alien.draw(canvas);
 	}
-
 
 	private int computeSize(int spec,int def){
 		int mode = View.MeasureSpec.getMode(spec);
