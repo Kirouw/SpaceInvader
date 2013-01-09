@@ -12,7 +12,7 @@ public class Alien extends Sprite{
 	@Override
 	public void act() {
 		if(direction){
-			if(x >= 550)
+			if(x >= 450)
 			{
 				direction = false;
 				y += 20;
